@@ -15,7 +15,6 @@ jobs:
     steps:
     - name: Start Timer
       run: echo "start-time=$(date +%s)" >> $GITHUB_ENV
-      id: timer
 
     - name: Checkout code
       uses: actions/checkout@v3
@@ -33,16 +32,22 @@ jobs:
 
     - name: Build and Test Containers
       run: |
+        start_time=$(date +%s)
+        echo "Starting Build and Test Containers at $start_time"
+        
+        # Run docker compose
         docker compose -f docker-compose.yml up --build --abort-on-container-exit
+        
         if [ $? -eq 0 ]; then
           echo "succeeded" > result.txt
-          echo "Test passed: Both Nginx servers responded as expected." >> result.txt
-          echo "- Server 1 returned custom HTML response" >> result.txt
-          echo "- Server 2 returned HTTP error code" >> result.txt
+          echo "Test passed: Both Nginx server blocks responded as expected." >> result.txt
+          echo "- Server Block 1 on port 8080 returned a 200 OK response" >> result.txt
+          echo "- Server Block 2 on port 8081 returned a 404 Not Found response" >> result.txt
         else
           echo "fail" > result.txt
-          echo "Test failed: One or more Nginx servers did not respond as expected." >> result.txt
+          echo "Test failed: Nginx servers did not respond as expected." >> result.txt
         fi
+        
         end_time=$(date +%s)
         echo "Build and Test Containers took $((end_time - start_time)) seconds."
 
@@ -54,7 +59,7 @@ jobs:
 
     - name: End Timer and Calculate Total Duration
       run: |
-        start_time="${{ steps.timer.outputs.start-time }}"
+        start_time=$(( ${{ env.start-time }} ))
         end_time=$(date +%s)
         total_duration=$((end_time - start_time))
         echo "Total CI job duration: $total_duration seconds."
