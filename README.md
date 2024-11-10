@@ -3,8 +3,8 @@
 ## Overview
 This project demonstrates a setup of two Docker containers orchestrated using `docker-compose`. 
 The first container runs an Nginx server with two server blocks:
-1. **Server Block 1**: Responds on port 8080 with a custom HTML response (200 OK).
-2. **Server Block 2**: Responds on port 8081 with a 404 Not Found error.
+1. **Server Block 1**: Responds on port 8080- returns a custom plain text message with a 200 OK status.
+2. **Server Block 2**: Responds on port 8081- returns a custom plain text error message with a 404 Not Found status.
 
 The second container is a testing container, written in Python, that checks the responses from both Nginx server blocks to ensure they behave as expected.
 
@@ -28,4 +28,6 @@ Dockerfile.nginx: Builds the Nginx image with two server blocks.
 Dockerfile.test: Builds a test image that verifies the responses from each server block.
 docker-compose.yml: Manages both containers using Docker Compose.
 GitHub Actions Workflow: Automates the build, test, and artifact creation process.
+
+
 
