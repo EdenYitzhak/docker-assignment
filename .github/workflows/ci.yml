@@ -28,7 +28,7 @@ jobs:
       run: echo "succeeded" > result.txt || echo "fail" > result.txt
 
     - name: Upload Result Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: test-result
         path: result.txt
