@@ -25,6 +25,7 @@ This setup is automatically built and tested in a GitHub Actions CI workflow. Up
 ```
 ## Project Structure
 Dockerfile.nginx: Builds the Nginx image with two server blocks.  
+<u>Dockerfile.nginx:</u>  
 Dockerfile.test: Builds a test image that verifies the responses from each server block.  
 docker-compose.yml: Manages both containers using Docker Compose.  
 GitHub Actions Workflow: Automates the build, test, and artifact creation process.  
@@ -54,3 +55,4 @@ Upload a result file indicating the success or failure of the tests.
       echo "fail" > result.txt
     fi
 ```
+This command ensures that the workflow continues smoothly to the final steps once the tests are complete.
