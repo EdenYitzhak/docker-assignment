@@ -22,7 +22,7 @@ This setup is automatically built and tested in a GitHub Actions CI workflow. Up
 └── .github/
     └── workflows/
         └── ci.yml                 # GitHub Actions CI workflow for building, testing, and publishing artifacts
-
+```
 ## Project Structure
 Dockerfile.nginx: Builds the Nginx image with two server blocks.
 Dockerfile.test: Builds a test image that verifies the responses from each server block.
