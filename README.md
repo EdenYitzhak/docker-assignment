@@ -29,5 +29,12 @@ Dockerfile.test: Builds a test image that verifies the responses from each serve
 docker-compose.yml: Manages both containers using Docker Compose.
 GitHub Actions Workflow: Automates the build, test, and artifact creation process.
 
+## CI Workflow
+The CI workflow is defined in .github/workflows/ci.yml to:
+
+Build both Docker images.
+Run tests on each Nginx server endpoint.
+Upload a result file indicating the success or failure of the tests.
+
 
 
