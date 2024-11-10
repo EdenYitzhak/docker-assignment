@@ -25,7 +25,6 @@ jobs:
         start_time=$(date +%s)
         echo "Start Docker Installation Check at $start_time"
         docker --version
-        docker-compose --version
         end_time=$(date +%s)
         echo "Docker Installation Check took $((end_time - start_time)) seconds."
 
