@@ -24,11 +24,10 @@ This setup is automatically built and tested in a GitHub Actions CI workflow. Up
         └── ci.yml                 # GitHub Actions CI workflow for building, testing, and publishing artifacts
 ```
 ## Project Structure
-Dockerfile.nginx: Builds the Nginx image with two server blocks.  
-<u>Dockerfile.nginx:</u>  
-Dockerfile.test: Builds a test image that verifies the responses from each server block.  
-docker-compose.yml: Manages both containers using Docker Compose.  
-GitHub Actions Workflow: Automates the build, test, and artifact creation process.  
+***Dockerfile.nginx:*** Builds the Nginx image with two server blocks.  
+***Dockerfile.test:*** Builds a test image that verifies the responses from each server block.  
+***docker-compose.yml:*** Manages both containers using Docker Compose.  
+***GitHub Actions Workflow:*** Automates the build, test, and artifact creation process.  
 
 ## CI Workflow
 The CI workflow is defined in .github/workflows/ci.yml to:
