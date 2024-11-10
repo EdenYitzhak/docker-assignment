@@ -36,8 +36,12 @@ jobs:
         docker compose -f docker-compose.yml up --build --abort-on-container-exit
         if [ $? -eq 0 ]; then
           echo "succeeded" > result.txt
+          echo "Test passed: Both Nginx servers responded as expected." >> result.txt
+          echo "- Server 1 returned custom HTML response" >> result.txt
+          echo "- Server 2 returned HTTP error code" >> result.txt
         else
           echo "fail" > result.txt
+          echo "Test failed: One or more Nginx servers did not respond as expected." >> result.txt
         fi
         end_time=$(date +%s)
         echo "Build and Test Containers took $((end_time - start_time)) seconds."
@@ -50,7 +54,7 @@ jobs:
 
     - name: End Timer and Calculate Total Duration
       run: |
-        start_time=$(( ${{ env.start-time }} ))
+        start_time="${{ steps.timer.outputs.start-time }}"
         end_time=$(date +%s)
         total_duration=$((end_time - start_time))
         echo "Total CI job duration: $total_duration seconds."
