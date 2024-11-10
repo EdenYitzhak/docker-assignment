@@ -14,18 +14,19 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v2
 
     - name: Build and Test Containers
       run: |
         docker-compose -f docker-compose.yml up --build
-
-    - name: Check Test Result and Create Artifact
-      if: success()
-      run: echo "succeeded" > result.txt || echo "fail" > result.txt
+        if [ $? -eq 0 ]; then
+          echo "succeeded" > result.txt
+        else
+          echo "fail" > result.txt
+        fi
 
     - name: Upload Result Artifact
       uses: actions/upload-artifact@v3
