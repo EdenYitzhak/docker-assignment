@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - name: Start Timer
-      run: echo "::set-output name=start-time::$(date +%s)"
+      run: echo "start-time=$(date +%s)" >> $GITHUB_ENV
       id: timer
 
     - name: Checkout code
@@ -33,9 +33,7 @@ jobs:
 
     - name: Build and Test Containers
       run: |
-        start_time=$(date +%s)
-        echo "Starting Build and Test Containers at $start_time"
-        docker compose -f docker-compose.yml up --build
+        docker compose -f docker-compose.yml up --build --abort-on-container-exit
         if [ $? -eq 0 ]; then
           echo "succeeded" > result.txt
         else
@@ -52,7 +50,7 @@ jobs:
 
     - name: End Timer and Calculate Total Duration
       run: |
-        start_time="${{ steps.timer.outputs.start-time }}"
+        start_time=$(( ${{ env.start-time }} ))
         end_time=$(date +%s)
         total_duration=$((end_time - start_time))
         echo "Total CI job duration: $total_duration seconds."
