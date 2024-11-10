@@ -24,17 +24,17 @@ This setup is automatically built and tested in a GitHub Actions CI workflow. Up
         └── ci.yml                 # GitHub Actions CI workflow for building, testing, and publishing artifacts
 ```
 ## Project Structure
-Dockerfile.nginx: Builds the Nginx image with two server blocks.
-Dockerfile.test: Builds a test image that verifies the responses from each server block.
-docker-compose.yml: Manages both containers using Docker Compose.
-GitHub Actions Workflow: Automates the build, test, and artifact creation process.
+Dockerfile.nginx: Builds the Nginx image with two server blocks.  
+Dockerfile.test: Builds a test image that verifies the responses from each server block.  
+docker-compose.yml: Manages both containers using Docker Compose.  
+GitHub Actions Workflow: Automates the build, test, and artifact creation process.  
 
 ## CI Workflow
 The CI workflow is defined in .github/workflows/ci.yml to:
 
-Build both Docker images.
-Run tests on each Nginx server endpoint.
-Upload a result file indicating the success or failure of the tests.
+Build both Docker images.  
+Run tests on each Nginx server endpoint.  
+Upload a result file indicating the success or failure of the tests.  
 
 ## Issue and Solution
 **Problem**: The CI workflow would get "stuck" and not move to the next steps after running the tests. This happened because docker-compose up waits for all containers to stop before finishing. In our setup, the nginx-server container kept running even after the nginx-tester container (which performs the tests) finished.
