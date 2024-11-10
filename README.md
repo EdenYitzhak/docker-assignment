@@ -36,5 +36,20 @@ Build both Docker images.
 Run tests on each Nginx server endpoint.
 Upload a result file indicating the success or failure of the tests.
 
+## Issue and Solution
+**Problem**: The CI workflow would get "stuck" and not move to the next steps after running the tests. This happened because docker-compose up waits for all containers to stop before finishing. In our setup, the nginx-server container kept running even after the nginx-tester container (which performs the tests) finished.
 
+**Solution**: To solve this, I added the --abort-on-container-exit option to docker-compose up. This makes Docker Compose exit as soon as the nginx-tester container completes. This way, the workflow moves to the next steps without hanging.
 
+```- name: Build and Test Containers
+  run: |
+    docker compose -f docker-compose.yml up --build --abort-on-container-exit
+    if [ $? -eq 0 ]; then
+      echo "succeeded" > result.txt
+      echo "Test passed: Both Nginx servers responded as expected." >> result.txt
+      echo "- Server 1 returned custom plain text response" >> result.txt
+      echo "- Server 2 returned HTTP 404 Not Found response" >> result.txt
+    else
+      echo "fail" > result.txt
+    fi
+```
