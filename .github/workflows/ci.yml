@@ -16,16 +16,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Debug - Check Docker Installation
-      run: |
-        echo "Checking Docker Installation"
-        docker --version
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
     - name: Build and Test Containers
       run: |
+        echo "Starting Build and Test Containers"
+        
         # Run docker compose
         docker compose -f docker-compose.yml up --build --abort-on-container-exit
         
@@ -37,6 +34,7 @@ jobs:
         else
           echo "fail" > result.txt
           echo "Test failed: Nginx servers did not respond as expected." >> result.txt
+        fi
 
     - name: Upload Result Artifact
       uses: actions/upload-artifact@v3
