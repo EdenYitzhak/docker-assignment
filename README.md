@@ -32,9 +32,9 @@ This setup is automatically built and tested in a GitHub Actions CI workflow. Up
 ## CI Workflow
 The CI workflow is defined in .github/workflows/ci.yml to:
 
-Build both Docker images.  
-Run tests on each Nginx server endpoint.  
-Upload a result file indicating the success or failure of the tests.  
+1.Build both Docker images.  
+2.Run tests on each Nginx server endpoint.  
+3.Upload a result file indicating the success or failure of the tests.  
 
 ## Issue and Solution
 **Problem**: The CI workflow would get "stuck" and not move to the next steps after running the tests. This happened because docker-compose up waits for all containers to stop before finishing. In our setup, the nginx-server container kept running even after the nginx-tester container (which performs the tests) finished.
