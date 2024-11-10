@@ -30,7 +30,7 @@ This setup is automatically built and tested in a GitHub Actions CI workflow. Up
 ***GitHub Actions Workflow:*** Automates the build, test, and artifact creation process.  
 
 ## CI Workflow
-The CI workflow is defined in .github/workflows/ci.yml to:
+The CI workflow is defined in `.github/workflows/ci.yml` to:
 
 1.Build both Docker images.  
 2.Run tests on each Nginx server endpoint.  
