@@ -23,7 +23,7 @@ jobs:
       run: |
         echo "Starting Build and Test Containers"
         
-        # Run docker compose
+        # docker compose
         docker compose -f docker-compose.yml up --build --abort-on-container-exit
         
         if [ $? -eq 0 ]; then
