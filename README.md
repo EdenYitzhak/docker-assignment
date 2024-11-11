@@ -57,7 +57,7 @@ The CI workflow is defined in `.github/workflows/ci.yml` to:
 This command ensures that the workflow continues smoothly to the final steps once the tests are complete.
 
 ***Note:***
-you can find in Action tab the build iteslf, and also downlaod the txt file
+You can find the build itself in the Actions tab, and you can also download the ```.txt``` file there.
 ![image](https://github.com/user-attachments/assets/04f08d1b-1ccf-4cfd-ad9b-1fd31f00983b)
 
 
