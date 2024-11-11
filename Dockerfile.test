@@ -1,11 +1,11 @@
 #  a lightweight Python image
 FROM python:3.9-slim
 
-# Install the requests library for HTTP requests
+# Installing the requests library for HTTP requests
 RUN pip install requests
 
-# Copy the test script
+# Copy of the test script
 COPY test_nginx.py /test_nginx.py
 
-# Run the test script
+# Run of the test script
 CMD ["python", "/test_nginx.py"]
